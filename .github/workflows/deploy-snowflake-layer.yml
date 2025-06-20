@@ -16,10 +16,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install snowflake connector
+      - name: Install snowflake connector (wheel only)
         run: |
           mkdir -p python
-          pip install -r requirements-snowflake.txt -t python/
+          pip install --upgrade pip
+          pip install --only-binary=:all: -r requirements-snowflake.txt -t python/
 
       - name: Zip layer
         run: zip -r snowflake_layer.zip python
